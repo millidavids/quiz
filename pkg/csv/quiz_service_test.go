@@ -26,14 +26,14 @@ func should_create_quiz_from_csv_file(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	qs := csv.QuizService{Filename: tmpfile.Name()}
+	qs := csv.QuizService{Filename: tmpfile.Name(), TimeLimit: 30}
 	q := qs.Create()
 
 	if typ := reflect.TypeOf(q).String(); typ != "*root.Quiz" {
-		t.Errorf("Created the wrong object type: %v", typ)
+		t.Errorf("created the wrong object type: %v", typ)
 	}
 
 	if qqs := q.Questions; qqs["1+1"] != 2 {
-		t.Errorf("Created the map of questions incorrectly: %v", qqs)
+		t.Errorf("created the map of questions incorrectly: %v", qqs)
 	}
 }
