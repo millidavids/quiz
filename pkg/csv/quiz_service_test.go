@@ -10,20 +10,7 @@ import (
 )
 
 func Test_QuizService(t *testing.T) {
-	t.Run("Can create a QuizService", should_create_quiz_service)
 	t.Run("Can create a Quiz from a csv file", should_create_quiz_from_csv_file)
-}
-
-func should_create_quiz_service(t *testing.T) {
-	qs := csv.NewQuizService("t")
-
-	if typ := reflect.TypeOf(qs).String(); typ != "*csv.QuizService" {
-		t.Errorf("Created the wrong object type: %v", typ)
-	}
-
-	if n := qs.Filename; n != "t" {
-		t.Errorf("Created with the wrong filename: %v", n)
-	}
 }
 
 func should_create_quiz_from_csv_file(t *testing.T) {
@@ -39,7 +26,7 @@ func should_create_quiz_from_csv_file(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	qs := csv.NewQuizService(tmpfile.Name())
+	qs := csv.QuizService{Filename: tmpfile.Name()}
 	q := qs.Create()
 
 	if typ := reflect.TypeOf(q).String(); typ != "*root.Quiz" {

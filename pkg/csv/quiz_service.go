@@ -11,14 +11,12 @@ import (
 	"github.com/millidavids/quiz/pkg"
 )
 
+// QuizService implements the root.QuizService
 type QuizService struct {
 	Filename string
 }
 
-func NewQuizService(f string) *QuizService {
-	return &QuizService{Filename: f}
-}
-
+// Create will generate a quiz from a csv file
 func (qs *QuizService) Create() *root.Quiz {
 	q := root.Quiz{Questions: make(map[string]int)}
 	f, _ := os.Open(qs.Filename)

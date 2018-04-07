@@ -46,7 +46,7 @@ func fake_stdin_runner(q *root.Quiz, a string) error {
 		return err
 	}
 
-	defer os.Remove(tmpfile.Name()) // clean up
+	defer os.Remove(tmpfile.Name())
 
 	if _, err := tmpfile.Write(content); err != nil {
 		return err
@@ -57,7 +57,7 @@ func fake_stdin_runner(q *root.Quiz, a string) error {
 	}
 
 	oldStdin := os.Stdin
-	defer func() { os.Stdin = oldStdin }() // Restore original Stdin
+	defer func() { os.Stdin = oldStdin }()
 
 	os.Stdin = tmpfile
 
